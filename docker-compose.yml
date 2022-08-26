@@ -1,0 +1,17 @@
+services:
+  mysql:
+    build: ./docker/builds/mysql
+    ports:
+      - "3386:3306"
+    volumes:
+      - "./docker/data/mysql/data:/var/lib/mysql" - "./docker/data/mysql/conf : /etc/mysql/conf.d"
+    restart: always
+    environment:
+      MYSQL_DATABASE: clientes
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+      MYSQL_ROOT_PASSWORD:
+  api:
+    depends_on:
+      - MySQL
+      Build: ./docker/builds/api
